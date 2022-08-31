@@ -4,17 +4,17 @@ A Flutter package that enables you to easily create custom app bars (i.e. Discor
 Control your window with ease, using functions like minimize, maximize, close, show, hide, tray, untray etc.;
 (Tray and untray still in works)
 
-##Feantures
+## Features
 
 ## Getting Started
-###Install the package using pubspec.yaml
+### Install the package using pubspec.yaml
 ```
 definitely_not_window:
   git:
     "https://github.com/define-laavi/definitely_not_window.git"
 ```
 
-###For Windows
+### For Windows
 Insert this lines at the start of main.cpp
 ```
 #include <definitely_not_window\definitely_not_window_plugin.h>
