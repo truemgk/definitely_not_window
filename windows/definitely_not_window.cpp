@@ -575,7 +575,7 @@ namespace dn_window
         return DefSubclassProc(window, message, wparam, lparam);
     }
 
-    bool dragWindow()
+    bool drag()
     {
         if (flutter_window == nullptr)
         {

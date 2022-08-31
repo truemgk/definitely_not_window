@@ -10,8 +10,8 @@ namespace dn_window
     typedef void (*TSetWindowCanBeShown)(bool);
     void setWindowCanBeShown(bool value);
 
-    typedef bool (*TDragWindow)();
-    bool dragWindow();
+    typedef bool (*TDrag)();
+    bool drag();
 
     typedef HWND (*TGetWindow)();
     HWND getWindow();

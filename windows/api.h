@@ -9,7 +9,7 @@ namespace dn_window
 
     typedef struct _DNPrivateAPI
     {
-        TDragWindow dragWindow;
+        TDrag drag;
     } DNPrivateAPI;
 
     typedef struct _DNPublicAPI

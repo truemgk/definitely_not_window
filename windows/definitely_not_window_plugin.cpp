@@ -81,9 +81,9 @@ namespace
         const flutter::MethodCall<flutter::EncodableValue> &method_call,
         std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result)
     {
-        if (method_call.method_name().compare("dragWindow") == 0)
+        if (method_call.method_name().compare("drag") == 0)
         {
-            bool callResult = dnAPI->privateAPI->dragWindow();
+            bool callResult = dnAPI->privateAPI->drag();
             if (callResult)
             {
                 result->Success();

@@ -12,7 +12,7 @@ dependencies:
 
   definitely_not_window:
     path: ../
-
+  google_fonts: ^2.3.1
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

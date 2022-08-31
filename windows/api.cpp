@@ -5,7 +5,7 @@
 namespace dn_window
 {
     DNPrivateAPI privateAPI = {
-        dragWindow};
+        drag};
 
     DNPublicAPI publicAPI = {
         isWindowLoaded,

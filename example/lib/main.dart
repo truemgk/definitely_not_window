@@ -1,12 +1,13 @@
 import 'package:definitely_not_window/definitely_not_window.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
 
   onWindowReady(() {
-    window.title = "fix/blurry-text - sf-sim - Definitely Not Git";
-    window.minSize = const Size(400, 400);
+    window.title = "Definitely Not Window Demo";
+    window.size = const Size(400, 400);
     window.show();
   });
 }
@@ -17,106 +18,195 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              height: 32,
+              color: const Color.fromARGB(255, 34, 34, 34),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 8.0,
+                  left: 6.0,
+                  right: 6.0,
+                  bottom: 6.0,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onPanStart: ((details) {
+                          window.drag();
+                        }),
+                        onDoubleTap: () {
+                          window.toggle();
+                        },
+                        child: Center(
+                          child: Text(
+                            "[Drag me / Double click me]",
+                            style: GoogleFonts.inter(
+                              fontSize: 11,
+                              color: const Color.fromARGB(255, 139, 136, 140),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    WinBarButton(
+                      "Minimize",
+                      action: () {
+                        window.minimize();
+                      },
+                    ),
+                    padding(5),
+                    WinBarButton(
+                      window.isMaximized ? "Restore" : "Maximize",
+                      action: () {
+                        window.toggle();
+                        setState(() {});
+                      },
+                    ),
+                    padding(5),
+                    WinBarButton(
+                      "X",
+                      action: () {
+                        window.close();
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Expanded(
+              child: Container(
+                color: const Color.fromARGB(255, 24, 24, 24),
+                child: Center(
+                  child: Text(
+                    "Definitely Not Window",
+                    style: GoogleFonts.inter(
+                      fontSize: 32,
+                      color: const Color.fromARGB(255, 20, 20, 20),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+class WinBarButton extends StatefulWidget {
+  const WinBarButton(
+    this.data, {
+    Key? key,
+    required this.action,
+  }) : super(key: key);
+
+  final String data;
+  final VoidCallback action;
+
+  @override
+  State<WinBarButton> createState() => _WinBarButtonState();
+}
+
+class _WinBarButtonState extends State<WinBarButton> {
+  bool _hover = false;
+  bool _down = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (event) {
+        setState(() {
+          _hover = true;
+        });
+      },
+      onExit: (event) {
+        setState(() {
+          _hover = false;
+          _down = false;
+        });
+      },
+      child: Listener(
+        onPointerDown: (event) {
+          setState(() {
+            _down = true;
+          });
+        },
+        onPointerUp: ((event) {
+          setState(() {
+            _down = false;
+          });
+          widget.action();
+        }),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          width: null,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: _hover
+                ? _down
+                    ? const Color.fromARGB(255, 80, 80, 80)
+                    : const Color.fromARGB(255, 59, 59, 59)
+                : const Color.fromARGB(255, 44, 44, 44),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: const Color.fromARGB(255, 59, 59, 59),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 1.0),
+                child: Text(
+                  widget.data,
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    color: const Color.fromARGB(255, 139, 136, 140),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget padding(double size) => SizedBox(width: size, height: size);
+
+// ignore: non_constant_identifier_names
+Padding vertical_separate() => Padding(
+      padding: const EdgeInsets.only(top: 6, bottom: 6, left: 2, right: 2),
+      child: Container(
+        width: 1,
+        color: const Color.fromARGB(255, 59, 59, 59),
+      ),
+    );
