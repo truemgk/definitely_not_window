@@ -4,8 +4,20 @@ A Flutter package that enables you to easily create custom app bars (i.e. Discor
 Control your window with ease, using functions like minimize, maximize, close, show, hide, tray, untray etc.;
 (Tray and untray still in works)
 
-## Features
+![example](https://user-images.githubusercontent.com/66747844/187699617-4e86e8a9-e330-46f1-83cb-48ed49ad0b4c.png)
 
+## Features
+```
+- Custom window frame - remove standard Windows/macOS/Linux titlebar and buttons
+- Show/hide window
+- Minimize/Maximize/Restore/Close window
+- Set window minimum, maximum and current size,
+- Set window position on screen
+- Set window title
+
+Upcoming
+- Minimize window to tray
+```
 ## Getting Started
 ### Install the package using pubspec.yaml
 ``` yaml
