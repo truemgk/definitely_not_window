@@ -1,18 +1,30 @@
 # definitely_not_window
 
-A new Flutter plugin project.
+A Flutter package that enables you to easily create custom app bars (i.e. Discord, DefinitelyNotSCM), by removing system ones.
+Control your window with ease, using functions like minimize, maximize, close, show, hide, tray, untray etc.;
+(Tray and untray still in works)
+
+##Feantures
 
 ## Getting Started
+###Install the package using pubspec.yaml
+```
+definitely_not_window:
+  git:
+    "https://github.com/define-laavi/definitely_not_window.git"
+```
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+###For Windows
+Insert this lines at the start of main.cpp
+```
+#include <definitely_not_window\definitely_not_window_plugin.h>
+auto dnw = dn_window_configure(DN_CUSTOM_FRAME | DN_HIDE_ON_STARTUP);
+```
+Next, in main method, after runApp:
+```
+onWindowReady(() {
+  window.title = "<Title>";
+  window.minSize = const Size(width_in_pixels, height_in_pixels);
+  window.show();
+});
+```
