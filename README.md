@@ -8,7 +8,7 @@ Control your window with ease, using functions like minimize, maximize, close, s
 
 ## Getting Started
 ### Install the package using pubspec.yaml
-```
+``` yaml
 definitely_not_window:
   git:
     "https://github.com/define-laavi/definitely_not_window.git"
@@ -16,12 +16,12 @@ definitely_not_window:
 
 ### For Windows
 Insert this lines at the start of main.cpp
-```
+``` cpp
 #include <definitely_not_window\definitely_not_window_plugin.h>
 auto dnw = dn_window_configure(DN_CUSTOM_FRAME | DN_HIDE_ON_STARTUP);
 ```
 Next, in main method, after runApp:
-```
+``` dart
 onWindowReady(() {
   window.title = "<Title>";
   window.minSize = const Size(width_in_pixels, height_in_pixels);
